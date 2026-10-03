@@ -71,8 +71,13 @@ export default function Projects({ onSelectProject }) {
               data-cursor="mission"
               data-cursor-text="VIEW BRIEFING →"
               onClick={() => {
-                sound.playWarp();
-                onSelectProject(mission);
+                if (mission.id === 'gesturesnap' && mission.liveUrl) {
+                  sound.playClick();
+                  window.open(mission.liveUrl, '_blank', 'noopener,noreferrer');
+                } else {
+                  sound.playWarp();
+                  onSelectProject(mission);
+                }
               }}
               className="group relative bg-cyber-card/85 backdrop-blur-md rounded-xl border border-cyber-cyan/20 hover:border-cyber-cyan p-5 sm:p-6 cursor-pointer hud-corner-box shadow-hud-card transition-all duration-300 hover:shadow-neon-cyan/30 flex flex-col justify-between"
             >
@@ -131,7 +136,22 @@ export default function Projects({ onSelectProject }) {
                     {mission.category}
                   </div>
                   <h3 className="text-xl sm:text-2xl font-black hud-font-title text-white group-hover:text-cyber-cyan transition-colors">
-                    {mission.title}
+                    {mission.id === 'gesturesnap' && mission.liveUrl ? (
+                      <a
+                        href={mission.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          sound.playClick();
+                        }}
+                        className="hover:text-cyber-cyan transition-colors"
+                      >
+                        {mission.title}
+                      </a>
+                    ) : (
+                      mission.title
+                    )}
                   </h3>
                 </div>
 
@@ -160,19 +180,36 @@ export default function Projects({ onSelectProject }) {
                 </div>
 
                 <div className="flex items-center justify-between gap-3 pt-2">
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      sound.playWarp();
-                      onSelectProject(mission);
-                    }}
-                    onMouseEnter={() => sound.playHover()}
-                    className="cyber-btn cyber-btn-cyan px-4 py-2 font-mono text-xs font-bold flex items-center gap-1.5 w-full sm:w-auto justify-center"
-                  >
-                    <span>VIEW MISSION BRIEFING</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </button>
+                  {mission.id === 'gesturesnap' && mission.liveUrl ? (
+                    <a
+                      href={mission.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        sound.playClick();
+                      }}
+                      onMouseEnter={() => sound.playHover()}
+                      className="cyber-btn cyber-btn-cyan px-4 py-2 font-mono text-xs font-bold flex items-center gap-1.5 w-full sm:w-auto justify-center"
+                    >
+                      <span>VIEW MISSION BRIEFING</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </a>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        sound.playWarp();
+                        onSelectProject(mission);
+                      }}
+                      onMouseEnter={() => sound.playHover()}
+                      className="cyber-btn cyber-btn-cyan px-4 py-2 font-mono text-xs font-bold flex items-center gap-1.5 w-full sm:w-auto justify-center"
+                    >
+                      <span>VIEW MISSION BRIEFING</span>
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </button>
+                  )}
 
                   {mission.liveUrl && mission.liveUrl !== '#' && (
                     <a

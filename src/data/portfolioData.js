@@ -291,7 +291,7 @@ export const MISSIONS = [
     image: "/images/gesturesnap.jpg",
     description: "Browser-based AI photo booth using hand gestures for touchless interaction, photo capture and automated photo strip generation.",
     technologies: ["HTML", "CSS", "JavaScript", "MediaPipe", "Webcam API", "Canvas"],
-    liveUrl: "https://gesturesnap.ai", // demo
+    liveUrl: "https://gesturesnap2.netlify.app/",
     githubUrl: "https://github.com/sreekar-thota",
     overview: "GestureSnap AI reimagines the traditional photo booth into a completely touchless, gesture-driven browser application. Utilizing Google MediaPipe's real-time hand landmark estimation, users can trigger countdowns with natural hand signs (such as peace/victory signs), take automated captures, and compile cyber-themed digital photo strips ready for sharing.",
     features: [

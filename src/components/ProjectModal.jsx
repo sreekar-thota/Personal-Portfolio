@@ -69,7 +69,18 @@ export default function ProjectModal({ project, onClose }) {
                     {project.category}
                   </div>
                   <h3 className="text-2xl sm:text-3xl font-black hud-font-title text-white">
-                    {project.title}
+                    {project.id === 'gesturesnap' && project.liveUrl ? (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-cyber-cyan transition-colors"
+                      >
+                        {project.title}
+                      </a>
+                    ) : (
+                      project.title
+                    )}
                   </h3>
                 </div>
                 <span className="font-mono text-xs font-bold px-3 py-1 rounded bg-cyber-card/90 border border-cyber-green text-cyber-green shadow-neon-green/30">
